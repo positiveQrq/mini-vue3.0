@@ -1,4 +1,5 @@
 import { track, trigger } from "./effect"
+import { ReactiveFlags } from "./reactive"
 
 const get = createGetter()
 const set = createSetter()
@@ -11,6 +12,11 @@ function createGetter(isReadonly=false) {
     //TODO收集依赖
     if(!isReadonly) {
       track(target, key)
+    }
+    if(key === ReactiveFlags.IS_REACTIVE) {
+      return !isReadonly
+    }else if(key === ReactiveFlags.IS_READONLY) {
+      return isReadonly
     }
     return res
   }
