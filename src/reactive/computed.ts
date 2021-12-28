@@ -8,7 +8,7 @@ class ComputedRefImpl {
 
   constructor(getter) {
     this._getter = getter
-    this._effect = new Reactive Effect(getter,()=>{
+    this._effect = new ReactiveEffect(getter,()=>{
       if(!this._dirty) {
         this._dirty = true
       }
