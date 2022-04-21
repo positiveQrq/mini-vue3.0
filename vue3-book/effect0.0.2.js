@@ -3,7 +3,7 @@ let activeEffect
 const bucket = new Set()
 
 function effect(fn) {
-  let activeEffect = fn
+  activeEffect = fn
   fn()
 }
 
@@ -17,7 +17,6 @@ const obj = new Proxy(data,{
   set(target, key, newVal) {
     target[key] = newVal
     bucket.forEach(fn=> {
-      console.log(fn,'fn')
       fn()
     })
     return true
